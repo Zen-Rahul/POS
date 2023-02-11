@@ -10,6 +10,5 @@ namespace POS.Api.Repositories.Interfaces
         Task DeleteOrder(int orderId);
         Task<IEnumerable<Order>> GetOrders();
         Task<Order?> GetOrderById(int id);
-        void Save();
     }
 }

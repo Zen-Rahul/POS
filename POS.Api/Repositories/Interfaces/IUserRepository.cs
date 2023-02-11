@@ -10,6 +10,5 @@ namespace POS.Api.Repositories.Interfaces
         Task DeleteUser(int userId);
         Task<IEnumerable<User>> GetUsers();
         Task<User?> GetUserById(int id);
-        void Save();
     }
 }

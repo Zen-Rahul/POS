@@ -1,4 +1,5 @@
-﻿using POS.Api.Data.Enums;
+﻿using POS.Api.Data.DbModels;
+using POS.Api.Data.Enums;
 
 namespace POS.Api.DTOs.Request
 {
@@ -6,7 +7,7 @@ namespace POS.Api.DTOs.Request
     {
         public PizzaSize Size { get; set; }
         public CrustType Crust { get; set; }
-        public CheeseRequest CheeseOptions { get; set; }
+        public List<CheeseRequest>? Cheese { get; set; }
         public List<ToppingsRequest>? Toppings { get; set; }
         public List<SauceRequest>? Sauces { get; set; }
         public decimal BasePrice { get; set; }

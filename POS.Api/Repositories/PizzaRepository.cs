@@ -38,11 +38,6 @@ namespace POS.Api.Repositories
             Context.Entry(Pizza).State = EntityState.Modified;
         }
 
-        public void Save()
-        {
-            Context.SaveChanges();
-        }
-
         private bool _disposed = false;
 
         protected override void Dispose(bool disposing)

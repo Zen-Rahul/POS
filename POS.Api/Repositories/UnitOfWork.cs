@@ -19,7 +19,6 @@ namespace Assignment.Repositories
             OrderRepository = orderRepository;
         }
         public IItemRepository ItemRepository { get; }
-
         public IPizzaRepository PizzaRepository { get; }
         public IOrderRepository OrderRepository { get; }
 
