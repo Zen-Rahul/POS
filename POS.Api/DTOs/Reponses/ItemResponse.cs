@@ -1,13 +1,9 @@
-﻿using POS.Api.Data.Enums;
+﻿using POS.Api.DTOs.Base;
 
 namespace POS.Api.DTOs.Reponses
 {
-    public class ItemResponse
+    public class ItemResponse : ItemBase
     {
         public string Name { get; set; }
-
-        public PizzaSize Size { get; set; }
-
-        public decimal Price { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using POS.Api.Data;
 
@@ -11,9 +12,10 @@ using POS.Api.Data;
 namespace POS.Api.Migrations
 {
     [DbContext(typeof(POSContext))]
-    partial class POSContextModelSnapshot : ModelSnapshot
+    [Migration("20230211123006_AddedOrder")]
+    partial class AddedOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,27 +69,6 @@ namespace POS.Api.Migrations
                     b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("POS.Api.Data.DbModels.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Value")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("POS.Api.Data.DbModels.Pizza", b =>
                 {
                     b.Property<int>("Id")
@@ -105,9 +86,6 @@ namespace POS.Api.Migrations
                     b.Property<int>("Crust")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Size")
                         .HasColumnType("int");
 
@@ -117,8 +95,6 @@ namespace POS.Api.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CheeseId");
-
-                    b.HasIndex("OrderId");
 
                     b.HasIndex("UserId");
 
@@ -203,17 +179,6 @@ namespace POS.Api.Migrations
                     b.ToTable("Toppings");
                 });
 
-            modelBuilder.Entity("POS.Api.Data.DbModels.Order", b =>
-                {
-                    b.HasOne("POS.Api.Data.DbModels.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("POS.Api.Data.DbModels.Pizza", b =>
                 {
                     b.HasOne("POS.Api.Data.DbModels.CheeseOptions", "Cheese")
@@ -222,19 +187,11 @@ namespace POS.Api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("POS.Api.Data.DbModels.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("POS.Api.Data.DbModels.User", null)
                         .WithMany("Pizzas")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Cheese");
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("POS.Api.Sauce", b =>

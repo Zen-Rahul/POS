@@ -2,7 +2,7 @@
 
 namespace POS.Api.Data.DbModels
 {
-    public class CheeseCatalog:Addons
+    public class CheeseOptions:Addons
     {
         public decimal ExtraCheesePrice { get; set; }
     }

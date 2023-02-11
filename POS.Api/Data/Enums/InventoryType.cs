@@ -6,6 +6,7 @@
         Topping,
         Sauce,
         Cheese,
-        Crust
+        Crust,
+        ExtraCheese
     }
 }
