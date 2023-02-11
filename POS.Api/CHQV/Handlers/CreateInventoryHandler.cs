@@ -7,7 +7,7 @@ using POS.Api.Repositories.Interfaces;
 
 namespace POS.Api.CHQV.Handlers
 {
-    public class CreateInventoryHandler : IRequestHandler<CreateInventoryCommand, bool>
+    public class CreateInventoryHandler : IRequestHandler<CreateInventory, bool>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -20,7 +20,7 @@ namespace POS.Api.CHQV.Handlers
             _logger = logger;
         }
 
-        public async Task<bool> Handle(CreateInventoryCommand command, CancellationToken cancellationToken)
+        public async Task<bool> Handle(CreateInventory command, CancellationToken cancellationToken)
         {
             try
             {

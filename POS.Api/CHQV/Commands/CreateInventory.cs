@@ -3,7 +3,7 @@ using POS.Api.DTOs.Request;
 
 namespace POS.Api.CHQV.Commands
 {
-    public class CreateInventoryCommand : IRequest<bool>
+    public class CreateInventory : IRequest<bool>
     {
         public ItemRequest Item { get; set; }
     }

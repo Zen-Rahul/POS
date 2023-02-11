@@ -6,6 +6,5 @@
         public string Email { get; set; }
         public string MobileNumber { get; set; }
         public string DeliveryAddress { get; set; }
-        public UserRequest User { get; set; }
     }
 }

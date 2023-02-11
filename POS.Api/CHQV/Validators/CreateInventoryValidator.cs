@@ -3,7 +3,7 @@ using POS.Api.CHQV.Commands;
 
 namespace POS.Api.CHQV.Validators
 {
-    public class CreateInventoryValidator : AbstractValidator<CreateInventoryCommand>
+    public class CreateInventoryValidator : AbstractValidator<CreateInventory>
     {
         public CreateInventoryValidator()
         {

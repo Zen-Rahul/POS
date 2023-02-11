@@ -17,13 +17,13 @@ namespace POS.Api.Controllers
 
         public InventoryController(IMediator mediator)
         {
-            this._mediator = mediator;
+            _mediator = mediator;
         }
         [HttpGet("toppings")]
         [ProducesResponseType(typeof(List<ItemResponse>), 200)]
         public async Task<IActionResult> GetToppings()
         {
-            var data = await this._mediator.Send(new GetItems
+            var data = await _mediator.Send(new GetItems
             {
                 InventoryType = InventoryType.Topping
             });
@@ -34,7 +34,7 @@ namespace POS.Api.Controllers
         [ProducesResponseType(typeof(List<ItemResponse>), 200)]
         public async Task<IActionResult> GetSauces()
         {
-            var data = await this._mediator.Send(new GetItems
+            var data = await _mediator.Send(new GetItems
             {
                 InventoryType = InventoryType.Sauce
             });
@@ -45,7 +45,7 @@ namespace POS.Api.Controllers
         [ProducesResponseType(typeof(List<ItemResponse>), 200)]
         public async Task<IActionResult> GetBase()
         {
-            var data = await this._mediator.Send(new GetItems
+            var data = await _mediator.Send(new GetItems
             {
                 InventoryType = InventoryType.PizzaBase
             });
@@ -56,7 +56,7 @@ namespace POS.Api.Controllers
         [ProducesResponseType(typeof(List<ItemResponse>), 200)]
         public async Task<IActionResult> GetCrust()
         {
-            var data = await this._mediator.Send(new GetItems
+            var data = await _mediator.Send(new GetItems
             {
                 InventoryType = InventoryType.Crust
             });
@@ -67,7 +67,7 @@ namespace POS.Api.Controllers
         [ProducesResponseType(typeof(List<ItemResponse>), 200)]
         public async Task<IActionResult> Getcheese()
         {
-            var data = await this._mediator.Send(new GetItems
+            var data = await _mediator.Send(new GetItems
             {
                 InventoryType = InventoryType.Cheese
             });
@@ -76,9 +76,9 @@ namespace POS.Api.Controllers
 
         [HttpPost("create-item")]
         [ProducesResponseType(typeof(bool), 201)]
-        public async Task<IActionResult> CreateItem(CreateInventoryCommand request)
+        public async Task<IActionResult> CreateItem(CreateInventory request)
         {
-            var result = await this._mediator.Send(request);
+            var result = await _mediator.Send(request);
             return result ? Created(Request.GetDisplayUrl(), request.Item) : Problem("Unable to create Item");
         }
     }

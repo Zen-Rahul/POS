@@ -1,6 +1,7 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using POS.Api.CHQV.Commands;
+using POS.Api.DTOs.Request;
 
 namespace POS.Api.Controllers
 {
@@ -8,17 +9,18 @@ namespace POS.Api.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private readonly IMediator mediator;
+        private readonly IMediator _mediator;
 
         public OrderController(IMediator mediator)
         {
-            this.mediator = mediator;
+            _mediator = mediator;
         }
 
         [HttpPost("take-order")]
-        public async Task<IActionResult> TakeOrder()
+        public async Task<IActionResult> TakeOrder(PlaceOrder request)
         {
-            return Accepted();
+            var order = await _mediator.Send(request);
+            return order ? Accepted() : Problem("Unable accept order. Some error occured.");
         }
     }
 }

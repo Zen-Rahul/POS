@@ -16,6 +16,7 @@ namespace POS.Api.DTOs
             CreateMap<Sauce, SauceRequest>().ReverseMap();
             CreateMap<CheeseOptions, CheeseRequest>().ReverseMap();
             CreateMap<User, UserRequest>().ReverseMap();
+            CreateMap<Order, OrderRequest>().ReverseMap();
         }
     }
 }

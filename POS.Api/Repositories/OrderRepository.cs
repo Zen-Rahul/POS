@@ -49,18 +49,18 @@ namespace POS.Api.Repositories
             Context.SaveChanges();
         }
 
-        private bool disposed = false;
+        private bool _disposed = false;
 
         protected override void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!_disposed)
             {
                 if (disposing)
                 {
                     Context.Dispose();
                 }
             }
-            this.disposed = true;
+            _disposed = true;
         }
 
         public new void Dispose()

@@ -9,7 +9,7 @@ namespace POS.Api.Data.DbModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
-        List<Pizza> Pizzas { get; set; }
+        public List<Pizza> Pizzas { get; set; }
 
         public decimal Value { get; set; }
         public User User { get; set; }
