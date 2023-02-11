@@ -6,36 +6,42 @@ using POS.Api.Repositories.Interfaces;
 
 namespace POS.Api.Repositories
 {
-    public class PizzaRepository : Repository<Pizza>, IPizzaRepository
+    public class OrderRepository : Repository<Order>, IOrderRepository
     {
-        public PizzaRepository(POSContext context) : base(context)
+        public OrderRepository(POSContext context) : base(context)
         {
         }
 
-        public void AddPizza(Pizza Pizza)
+        public Task AddOrder(Order order)
         {
-            Context.Pizzas.Add(Pizza);
+            return Task.Run(() => Context.Orders.Add(order));
         }
 
-        public void DeletePizza(int PizzaId)
+        public Task DeleteOrder(int orderId)
         {
-            var Pizza = Context.Pizzas.FindAsync(PizzaId);
-            Context.Remove(Pizza);
+            return Task.Run(() =>
+            {
+                var Order = Context.Orders.FindAsync(orderId);
+                Context.Remove(Order);
+            });
         }
 
-        public async Task<Pizza?> GetPizzaById(int id)
+        public async Task<Order?> GetOrderById(int id)
         {
-            return await Context.Pizzas.FindAsync(id);
+            return await Context.Orders.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Pizza>> GetPizzas()
+        public async Task<IEnumerable<Order>> GetOrders()
         {
-            return await Context.Pizzas.ToListAsync();
+            return await Context.Orders.ToListAsync();
         }
 
-        public void UpdatePizza(Pizza Pizza)
+        public Task UpdateOrder(Order order)
         {
-            Context.Entry(Pizza).State = EntityState.Modified;
+            return Task.Run(() =>
+            {
+                Context.Entry(order).State = EntityState.Modified;
+            });
         }
 
         public void Save()

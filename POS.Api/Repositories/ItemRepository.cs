@@ -57,7 +57,7 @@ namespace POS.Api.Repositories
 
         private bool disposed = false;
 
-        protected virtual void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             if (!this.disposed)
             {
@@ -69,7 +69,7 @@ namespace POS.Api.Repositories
             this.disposed = true;
         }
 
-        public void Dispose()
+        public new void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
