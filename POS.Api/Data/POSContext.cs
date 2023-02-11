@@ -13,8 +13,10 @@ namespace POS.Api.Data
 
         public DbSet<Item> Items { get; set; }
         public DbSet<Pizza> Pizzas { get; set; }
-        public DbSet<CheeseCatalog> CheeseCatalogs { get; set; }
+        public DbSet<CheeseOptions> CheeseOptions { get; set; }
         public DbSet<Sauce> Sauces { get; set; }
         public DbSet<Topping> Toppings { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

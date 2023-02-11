@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using POS.Api.Data;
 
@@ -11,9 +12,10 @@ using POS.Api.Data;
 namespace POS.Api.Migrations
 {
     [DbContext(typeof(POSContext))]
-    partial class POSContextModelSnapshot : ModelSnapshot
+    [Migration("20230211123129_AddedOrder2")]
+    partial class AddedOrder2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,9 +107,6 @@ namespace POS.Api.Migrations
                     b.Property<int>("Crust")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Size")
                         .HasColumnType("int");
 
@@ -117,8 +116,6 @@ namespace POS.Api.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CheeseId");
-
-                    b.HasIndex("OrderId");
 
                     b.HasIndex("UserId");
 
@@ -222,19 +219,11 @@ namespace POS.Api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("POS.Api.Data.DbModels.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("POS.Api.Data.DbModels.User", null)
                         .WithMany("Pizzas")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Cheese");
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("POS.Api.Sauce", b =>
