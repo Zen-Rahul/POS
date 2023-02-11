@@ -1,10 +1,9 @@
 ﻿using POS.Api.Data.DbModels;
+using POS.Api.DTOs.Base;
 
 namespace POS.Api.DTOs.Request
 {
-    public class OrderRequest
+    public class OrderRequest: OrderBase
     {
-        public List<PizzaRequest> Pizzas { get; set; }
-        public UserRequest User { get; set; }
     }
 }

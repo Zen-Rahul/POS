@@ -24,6 +24,5 @@ namespace POS.Api.Data.DbModels
 
         public string DeliveryAddress { get; set; }
 
-        public virtual ICollection<Pizza> Pizzas { get; set; }
     }
 }

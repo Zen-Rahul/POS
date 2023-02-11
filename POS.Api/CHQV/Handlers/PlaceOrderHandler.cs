@@ -2,11 +2,12 @@
 using MediatR;
 using POS.Api.CHQV.Commands;
 using POS.Api.Data.DbModels;
+using POS.Api.DTOs.Reponses;
 using POS.Api.Repositories.Interfaces;
 
 namespace POS.Api.CHQV.Handlers
 {
-    public class PlaceOrderHandler : IRequestHandler<PlaceOrder, bool>
+    public class PlaceOrderHandler : IRequestHandler<PlaceOrder, OrderResponse>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -19,20 +20,13 @@ namespace POS.Api.CHQV.Handlers
             _logger = logger;
         }
 
-        public async Task<bool> Handle(PlaceOrder request, CancellationToken cancellationToken)
+        public async Task<OrderResponse?> Handle(PlaceOrder request, CancellationToken cancellationToken)
         {
-            try
-            {
-                var order = _mapper.Map<Order>(request.Order);
-                await _unitOfWork.OrderRepository.AddOrder(order);
-                await _unitOfWork.SaveAsync();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Unable to accept Order", ex);
-                return false;
-            }
+            var order = _mapper.Map<Order>(request.Order);
+            await _unitOfWork.OrderRepository.AddOrder(order);
+            await _unitOfWork.SaveAsync();
+
+            return _mapper.Map<OrderResponse>(order);
         }
     }
 }

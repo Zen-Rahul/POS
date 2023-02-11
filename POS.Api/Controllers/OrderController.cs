@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using POS.Api.CHQV.Commands;
 using POS.Api.DTOs.Request;
@@ -10,17 +11,27 @@ namespace POS.Api.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly ILogger<OrderController> _logger;
 
-        public OrderController(IMediator mediator)
+        public OrderController(IMediator mediator, ILogger<OrderController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
-        [HttpPost("take-order")]
-        public async Task<IActionResult> TakeOrder(PlaceOrder request)
+        [HttpPost("place-order")]
+        public async Task<IActionResult> PlaceOrder(PlaceOrder request)
         {
-            var order = await _mediator.Send(request);
-            return order ? Accepted() : Problem("Unable accept order. Some error occured.");
+            try
+            {
+                var order = await _mediator.Send(request);
+                return Created(Request.GetDisplayUrl(), order);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Unable to place order", ex);
+                return Problem("Unable accept order. Some error occured.");
+            }
         }
     }
 }

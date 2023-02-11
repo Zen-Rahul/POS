@@ -16,7 +16,7 @@ namespace POS.Api.Data.DbModels
 
         [Required]
         public CrustType Crust { get; set; }
-        public CheeseOptions Cheese { get; set; }
+        public List<CheeseOptions>? Cheese { get; set; }
         public List<Topping>? Toppings { get; set; }
         public List<Sauce>? Sauces { get; set; }
         public decimal BasePrice { get; set; }
