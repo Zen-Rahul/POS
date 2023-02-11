@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using POS.Api.Data;
 
@@ -11,9 +12,10 @@ using POS.Api.Data;
 namespace POS.Api.Migrations
 {
     [DbContext(typeof(POSContext))]
-    partial class POSContextModelSnapshot : ModelSnapshot
+    [Migration("20230211123441_AddedOrderFk")]
+    partial class AddedOrderFk
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,15 +35,10 @@ namespace POS.Api.Migrations
                     b.Property<decimal>("ExtraCheesePrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("PizzaId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PizzaId");
 
                     b.ToTable("CheeseOptions");
                 });
@@ -104,6 +101,9 @@ namespace POS.Api.Migrations
                     b.Property<decimal>("BasePrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("CheeseId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Crust")
                         .HasColumnType("int");
 
@@ -113,9 +113,16 @@ namespace POS.Api.Migrations
                     b.Property<int>("Size")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("CheeseId");
+
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Pizzas");
                 });
@@ -198,17 +205,6 @@ namespace POS.Api.Migrations
                     b.ToTable("Toppings");
                 });
 
-            modelBuilder.Entity("POS.Api.Data.DbModels.CheeseOptions", b =>
-                {
-                    b.HasOne("POS.Api.Data.DbModels.Pizza", "Pizza")
-                        .WithMany("Cheese")
-                        .HasForeignKey("PizzaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pizza");
-                });
-
             modelBuilder.Entity("POS.Api.Data.DbModels.Order", b =>
                 {
                     b.HasOne("POS.Api.Data.DbModels.User", "User")
@@ -222,11 +218,23 @@ namespace POS.Api.Migrations
 
             modelBuilder.Entity("POS.Api.Data.DbModels.Pizza", b =>
                 {
+                    b.HasOne("POS.Api.Data.DbModels.CheeseOptions", "Cheese")
+                        .WithMany()
+                        .HasForeignKey("CheeseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("POS.Api.Data.DbModels.Order", "Order")
-                        .WithMany("Pizzas")
+                        .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("POS.Api.Data.DbModels.User", null)
+                        .WithMany("Pizzas")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Cheese");
 
                     b.Navigation("Order");
                 });
@@ -245,18 +253,16 @@ namespace POS.Api.Migrations
                         .HasForeignKey("PizzaId");
                 });
 
-            modelBuilder.Entity("POS.Api.Data.DbModels.Order", b =>
-                {
-                    b.Navigation("Pizzas");
-                });
-
             modelBuilder.Entity("POS.Api.Data.DbModels.Pizza", b =>
                 {
-                    b.Navigation("Cheese");
-
                     b.Navigation("Sauces");
 
                     b.Navigation("Toppings");
+                });
+
+            modelBuilder.Entity("POS.Api.Data.DbModels.User", b =>
+                {
+                    b.Navigation("Pizzas");
                 });
 #pragma warning restore 612, 618
         }

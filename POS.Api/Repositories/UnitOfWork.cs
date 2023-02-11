@@ -1,6 +1,5 @@
 ﻿
 using POS.Api.Data;
-using POS.Api.Data.DbModels;
 using POS.Api.Repositories.Interfaces;
 
 namespace Assignment.Repositories
@@ -11,15 +10,18 @@ namespace Assignment.Repositories
 
         public UnitOfWork(POSContext posContext,
             IItemRepository itemRepository,
-            IPizzaRepository pizzaRepository)
+            IPizzaRepository pizzaRepository,
+            IOrderRepository orderRepository)
         {
             _context = posContext;
-            this.ItemRepository = itemRepository;
-            this.PizzaRepository = pizzaRepository;
+            ItemRepository = itemRepository;
+            PizzaRepository = pizzaRepository;
+            OrderRepository = orderRepository;
         }
         public IItemRepository ItemRepository { get; }
 
         public IPizzaRepository PizzaRepository { get; }
+        public IOrderRepository OrderRepository { get; }
 
         public async Task<int> SaveAsync()
         {

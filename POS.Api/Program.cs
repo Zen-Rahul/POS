@@ -1,5 +1,6 @@
 using NLog;
 using POS.Api;
+using System.Text.Json.Serialization;
 
 var logger = LogManager.Setup().LoadConfigurationFromXml("NLog.Config").GetCurrentClassLogger();
 logger.Debug("Logger Intialized");
@@ -8,7 +9,10 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
-    builder.Services.AddControllers();
+    builder.Services.AddControllers().AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    }); ;
     builder.ConfigureDataBase();
     builder.ConfigureLog();
     builder.ConfigureAutoMapper();

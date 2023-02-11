@@ -11,9 +11,6 @@ namespace POS.Api.Data.DbModels.BaseModels
         public int Id { get; set; }
 
         [Required]
-        public PizzaSize PizzaSize { get; set; }
-
-        [Required]
         public decimal Price { get; set; }
 
     }

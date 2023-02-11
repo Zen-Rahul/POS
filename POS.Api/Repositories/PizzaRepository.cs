@@ -43,21 +43,21 @@ namespace POS.Api.Repositories
             Context.SaveChanges();
         }
 
-        private bool disposed = false;
+        private bool _disposed = false;
 
-        protected virtual void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!_disposed)
             {
                 if (disposing)
                 {
                     Context.Dispose();
                 }
             }
-            this.disposed = true;
+            _disposed = true;
         }
 
-        public void Dispose()
+        public new void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);

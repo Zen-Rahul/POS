@@ -5,10 +5,12 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
+using POS.Api.CHQV.Commands;
 using POS.Api.CHQV.Queries;
 using POS.Api.CHQV.Validators;
 using POS.Api.Data;
 using POS.Api.DTOs;
+using POS.Api.Filters;
 using POS.Api.Repositories;
 using POS.Api.Repositories.Base;
 using POS.Api.Repositories.Interfaces;
@@ -35,7 +37,10 @@ namespace POS.Api
         {
             // Learn more about configuring Swagger/ OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SchemaFilter<EnumSchemaFilter>();
+            });
         }
 
         public static void ConfigureAutoMapper(this WebApplicationBuilder builder)
@@ -54,12 +59,15 @@ namespace POS.Api
         public static void ConfigureMediatR(this WebApplicationBuilder builder)
         {
             builder.Services.AddMediatR(typeof(GetItems));
+            builder.Services.AddMediatR(typeof(CreateInventory));
+            builder.Services.AddMediatR(typeof(PlaceOrder));
         }
 
         public static void ConfigureFluentValidation(this WebApplicationBuilder builder)
         {
             builder.Services.AddFluentValidationAutoValidation();
             builder.Services.AddScoped<IValidator<GetItems>, GetItemsValidator>();
+            builder.Services.AddScoped<IValidator<CreateInventory>, CreateInventoryValidator>();
         }
 
         public static void AddSingletonDependencies(this WebApplicationBuilder builder)
@@ -72,6 +80,8 @@ namespace POS.Api
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IItemRepository, ItemRepository>();
             builder.Services.AddScoped<IPizzaRepository, PizzaRepository>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
         }
 
         public static void AddTransitiveDependencies(this WebApplicationBuilder builder)

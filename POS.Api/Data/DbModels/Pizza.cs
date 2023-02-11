@@ -16,10 +16,14 @@ namespace POS.Api.Data.DbModels
 
         [Required]
         public CrustType Crust { get; set; }
-        public bool Cheese { get; set; }
-        public bool ExtraCheese { get; set; }
+        public List<CheeseOptions>? Cheese { get; set; }
         public List<Topping>? Toppings { get; set; }
         public List<Sauce>? Sauces { get; set; }
         public decimal BasePrice { get; set; }
+
+        public virtual Order Order { get; set; }
+        
+        [ForeignKey(nameof(Order))]
+        public int OrderId { get; set; }
     }
 }

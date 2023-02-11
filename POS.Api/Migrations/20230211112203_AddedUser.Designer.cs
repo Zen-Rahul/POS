@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using POS.Api.Data;
 
@@ -11,9 +12,10 @@ using POS.Api.Data;
 namespace POS.Api.Migrations
 {
     [DbContext(typeof(POSContext))]
-    partial class POSContextModelSnapshot : ModelSnapshot
+    [Migration("20230211112203_AddedUser")]
+    partial class AddedUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,15 +35,10 @@ namespace POS.Api.Migrations
                     b.Property<decimal>("ExtraCheesePrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("PizzaId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PizzaId");
 
                     b.ToTable("CheeseOptions");
                 });
@@ -72,27 +69,6 @@ namespace POS.Api.Migrations
                     b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("POS.Api.Data.DbModels.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Value")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("POS.Api.Data.DbModels.Pizza", b =>
                 {
                     b.Property<int>("Id")
@@ -104,18 +80,24 @@ namespace POS.Api.Migrations
                     b.Property<decimal>("BasePrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<bool>("Cheese")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Crust")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<bool>("ExtraCheese")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Size")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Pizzas");
                 });
@@ -198,37 +180,15 @@ namespace POS.Api.Migrations
                     b.ToTable("Toppings");
                 });
 
-            modelBuilder.Entity("POS.Api.Data.DbModels.CheeseOptions", b =>
-                {
-                    b.HasOne("POS.Api.Data.DbModels.Pizza", "Pizza")
-                        .WithMany("Cheese")
-                        .HasForeignKey("PizzaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pizza");
-                });
-
-            modelBuilder.Entity("POS.Api.Data.DbModels.Order", b =>
+            modelBuilder.Entity("POS.Api.Data.DbModels.Pizza", b =>
                 {
                     b.HasOne("POS.Api.Data.DbModels.User", "User")
-                        .WithMany()
+                        .WithMany("Pizzas")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("POS.Api.Data.DbModels.Pizza", b =>
-                {
-                    b.HasOne("POS.Api.Data.DbModels.Order", "Order")
-                        .WithMany("Pizzas")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("POS.Api.Sauce", b =>
@@ -245,18 +205,16 @@ namespace POS.Api.Migrations
                         .HasForeignKey("PizzaId");
                 });
 
-            modelBuilder.Entity("POS.Api.Data.DbModels.Order", b =>
-                {
-                    b.Navigation("Pizzas");
-                });
-
             modelBuilder.Entity("POS.Api.Data.DbModels.Pizza", b =>
                 {
-                    b.Navigation("Cheese");
-
                     b.Navigation("Sauces");
 
                     b.Navigation("Toppings");
+                });
+
+            modelBuilder.Entity("POS.Api.Data.DbModels.User", b =>
+                {
+                    b.Navigation("Pizzas");
                 });
 #pragma warning restore 612, 618
         }

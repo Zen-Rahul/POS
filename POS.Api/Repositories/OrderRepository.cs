@@ -1,52 +1,46 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using POS.Api.Data;
 using POS.Api.Data.DbModels;
-using POS.Api.Data.Enums;
 using POS.Api.Repositories.Base;
 using POS.Api.Repositories.Interfaces;
 
 namespace POS.Api.Repositories
 {
-    public class ItemRepository : Repository<Item>, IItemRepository
+    public class OrderRepository : Repository<Order>, IOrderRepository
     {
-        public ItemRepository(POSContext context) : base(context)
+        public OrderRepository(POSContext context) : base(context)
         {
         }
 
-        public Task AddItem(Item Item)
+        public Task AddOrder(Order order)
         {
-            return Task.Run(() => Context.Items.Add(Item));
+            return Task.Run(() => Context.Orders.Add(order));
         }
 
-        public Task DeleteItem(int ItemId)
+        public Task DeleteOrder(int orderId)
         {
             return Task.Run(() =>
             {
-                var Item = Context.Items.FindAsync(ItemId);
-                Context.Remove(Item);
+                var Order = Context.Orders.FindAsync(orderId);
+                Context.Remove(Order);
             });
         }
 
-        public async Task<Item?> GetItemById(int id)
+        public async Task<Order?> GetOrderById(int id)
         {
-            return await Context.Items.FindAsync(id);
+            return await Context.Orders.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Item>> GetItems()
+        public async Task<IEnumerable<Order>> GetOrders()
         {
-            return await Context.Items.ToListAsync();
+            return await Context.Orders.ToListAsync();
         }
 
-        public async Task<IEnumerable<Item>> GetItems(InventoryType inventoryType)
-        {
-            return await Context.Items.Where(x => x.Type.Equals(inventoryType)).ToListAsync();
-        }
-
-        public Task UpdateItem(Item Item)
+        public Task UpdateOrder(Order order)
         {
             return Task.Run(() =>
             {
-                Context.Entry(Item).State = EntityState.Modified;
+                Context.Entry(order).State = EntityState.Modified;
             });
         }
 
