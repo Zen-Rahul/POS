@@ -6,7 +6,6 @@
         Peppers,
         Bacon,
         Onions,
-        ExtraCheese,
         Mushrooms
     }
 }

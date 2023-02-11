@@ -46,11 +46,6 @@ namespace POS.Api.Repositories
             });
         }
 
-        public void Save()
-        {
-            Context.SaveChanges();
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (!this.disposed)

@@ -50,11 +50,6 @@ namespace POS.Api.Repositories
             });
         }
 
-        public void Save()
-        {
-            Context.SaveChanges();
-        }
-
         private bool _disposed = false;
 
         protected override void Dispose(bool disposing)

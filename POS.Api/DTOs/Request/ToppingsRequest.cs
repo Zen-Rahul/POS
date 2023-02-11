@@ -2,7 +2,7 @@
 
 namespace POS.Api.DTOs.Request
 {
-    public class ToppingsRequest
+    public class ToppingsRequest: AddonRequest
     {
         public ToppingType Type { get; set; }
     }

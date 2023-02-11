@@ -11,6 +11,5 @@ namespace POS.Api.Repositories.Interfaces
         Task<IEnumerable<Item>> GetItems();
         Task<IEnumerable<Item>> GetItems(InventoryType inventoryType);
         Task<Item?> GetItemById(int id);
-        void Save();
     }
 }

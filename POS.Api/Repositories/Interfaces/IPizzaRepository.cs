@@ -9,6 +9,5 @@ namespace POS.Api.Repositories.Interfaces
         void DeletePizza(int PizzaId);
         Task<IEnumerable<Pizza>> GetPizzas();
         Task<Pizza?> GetPizzaById(int id);
-        void Save();
     }
 }
