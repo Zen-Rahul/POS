@@ -17,3 +17,5 @@ Welcome to Pizza Ordering System. Order your pizza and enjoy :)
 - xUnit
 - FakeItEasy
 - Shouldly
+
+### For static code analysis SONAR is integrated with GIT hub action
