@@ -59,9 +59,9 @@ jobs:
       - name: Run tests
         run: |
           cd 'POS.UI'
-          npm run test:headless
+          npm run test
 
       - name: Build
         run: |
           cd 'POS.UI'
-          npm run build:prod
+          npm run build
