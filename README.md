@@ -21,7 +21,7 @@ Welcome to Pizza Ordering System. Order your pizza and enjoy :)
 1. Correct conncetion string appSettings.Json of POS.API.
     `"POSConnStr": "Data Source=.;Initial Catalog=POSDb;Integrated Security=true;"`
 2. Run migration using EF core `update-database`
-3. Seed Data for inventory
+3. Seed Data for inventory from script `SeedingScript.sql`
 
 ## Technology stack
 
