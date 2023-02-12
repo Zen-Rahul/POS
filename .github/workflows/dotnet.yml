@@ -57,7 +57,11 @@ jobs:
           npm ci
 
       - name: Run tests
-        run: npm run test:headless
+        run: |
+          cd 'POS.UI'
+          npm run test:headless
 
       - name: Build
-        run: npm run build:prod
+        run: |
+          cd 'POS.UI'
+          npm run build:prod
