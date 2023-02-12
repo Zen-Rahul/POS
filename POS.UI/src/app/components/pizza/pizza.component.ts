@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Item } from '../models/item';
-import { InventoryService } from '../services/inventory.service';
+import { Item } from '../../models/item';
+import { InventoryService } from '../../services/inventory.service';
 
 @Component({
   selector: 'app-pizza',

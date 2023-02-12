@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Item } from '../models/item';
+import { Item } from '../../models/item';
 import { PizzaDialogComponent } from '../pizza-dialog/pizza-dialog.component';
 
 @Component({
@@ -8,8 +8,9 @@ import { PizzaDialogComponent } from '../pizza-dialog/pizza-dialog.component';
   templateUrl: './pizza-card.component.html',
   styleUrls: ['./pizza-card.component.scss'],
 })
-export class PizzaCardComponent {
+export class PizzaCardComponent implements OnDestroy{
   constructor(public dialog: MatDialog) {}
+  
   @Input() pizza: Item | undefined;
   @Input() showAction = false;
 
@@ -17,5 +18,9 @@ export class PizzaCardComponent {
     this.dialog.open(PizzaDialogComponent, {
       data: this.pizza,
     });
+  }
+
+  ngOnDestroy(): void {
+    
   }
 }

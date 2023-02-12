@@ -1,13 +1,13 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Item } from '../models/item';
-import { Order } from '../models/order';
-import { Pizza } from '../models/pizza';
-import { User } from '../models/user';
-import { InventoryService } from '../services/inventory.service';
-import { OrderService } from '../services/order.service';
+import { Item } from '../../models/item';
+import { Order } from '../../models/order';
+import { Pizza } from '../../models/pizza';
+import { InventoryService } from '../../services/inventory.service';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-pizza-dialog',
@@ -49,9 +49,11 @@ export class PizzaDialogComponent implements OnInit {
   extraCheesePrice = 0;
 
   constructor(
+    private dialogRef: MatDialogRef<PizzaDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public pizza: Item,
     private inventoryService: InventoryService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private router: Router
   ) {
     this.toppings$ = this.inventoryService.getToppings();
     this.sauces$ = this.inventoryService.getSauces();
@@ -139,8 +141,11 @@ export class PizzaDialogComponent implements OnInit {
       value: this.cartTotal
     } as Order;
 
-    this.orderService.placeOrder(order).subscribe(x => console.log(x));
-    console.log(order);
+    this.orderService.placeOrder(order).subscribe((x: Order) => {
+      const url = `/order/${x.id}`;
+      this.dialogRef.close();
+      this.router.navigateByUrl(url)
+    });
   }
   
 }

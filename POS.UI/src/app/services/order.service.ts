@@ -15,4 +15,9 @@ export class OrderService {
     const url = `${environment.config.apiUrl}Order/place-order`;
     return this.httpClient.post(url, {"order": order});
   }
+
+  getOrder(id: number): Observable<Order> {
+    const url = `${environment.config.apiUrl}Order/${id}`;
+    return this.httpClient.get<Order>(url);
+  }
 }

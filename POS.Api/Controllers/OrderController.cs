@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using POS.Api.CHQV.Commands;
+using POS.Api.CHQV.Queries;
 using POS.Api.DTOs.Request;
 
 namespace POS.Api.Controllers
@@ -32,6 +33,17 @@ namespace POS.Api.Controllers
                 _logger.LogError("Unable to place order", ex);
                 return Problem("Unable accept order. Some error occured.");
             }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOrder(int id)
+        {
+            var order = await _mediator.Send(new GetOrder
+            {
+                Id = id
+            });
+
+            return Ok(order);
         }
     }
 }
