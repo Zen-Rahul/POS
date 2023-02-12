@@ -9,11 +9,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatNativeDateModule} from '@angular/material/core';
 import { MaterialModule } from '../material.module';
+import { PizzaCardComponent } from './pizza-card/pizza-card.component';
+import { PizzaDialogComponent } from './pizza-dialog/pizza-dialog.component';
+import { ItemSizeFilterPipe } from './pipes/inventory-type-filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PizzaComponent
+    PizzaComponent,
+    PizzaCardComponent,
+    PizzaDialogComponent,
+    ItemSizeFilterPipe
   ],
   imports: [
     BrowserModule,

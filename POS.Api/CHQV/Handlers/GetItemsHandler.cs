@@ -23,7 +23,7 @@ namespace POS.Api.CHQV.Handlers
         {
             try
             {
-                var result = _unitOfWork.ItemRepository.GetItems(request.InventoryType);
+                var result = await _unitOfWork.ItemRepository.GetItems(request.InventoryType);
                 return _mapper.Map<IEnumerable<ItemResponse>>(result);
             }
             catch (Exception ex)

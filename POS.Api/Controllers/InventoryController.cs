@@ -65,11 +65,22 @@ namespace POS.Api.Controllers
 
         [HttpGet("cheese")]
         [ProducesResponseType(typeof(List<ItemResponse>), 200)]
-        public async Task<IActionResult> Getcheese()
+        public async Task<IActionResult> GetCheese()
         {
             var data = await _mediator.Send(new GetItems
             {
                 InventoryType = InventoryType.Cheese
+            });
+            return Ok(data);
+        }
+
+        [HttpGet("extra-cheese")]
+        [ProducesResponseType(typeof(List<ItemResponse>), 200)]
+        public async Task<IActionResult> GetExtraCheese()
+        {
+            var data = await _mediator.Send(new GetItems
+            {
+                InventoryType = InventoryType.ExtraCheese
             });
             return Ok(data);
         }

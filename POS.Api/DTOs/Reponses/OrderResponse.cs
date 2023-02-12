@@ -5,6 +5,5 @@ namespace POS.Api.DTOs.Reponses
     public class OrderResponse: OrderBase
     {
         public int Id { get; set; }
-        public decimal Value { get; set; }
     }
 }

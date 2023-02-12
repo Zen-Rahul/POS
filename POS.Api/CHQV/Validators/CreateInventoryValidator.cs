@@ -10,6 +10,7 @@ namespace POS.Api.CHQV.Validators
             RuleFor(x => x.Item).NotNull();
             RuleFor(x => x.Item.Price).NotNull().GreaterThan(0);
             RuleFor(x => x.Item.Size).NotEmpty();
+            RuleFor(x => x.Item.Name).NotEmpty();
         }
     }
 }

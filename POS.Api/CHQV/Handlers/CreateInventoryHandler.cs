@@ -25,7 +25,6 @@ namespace POS.Api.CHQV.Handlers
             try
             {
                 var item = _mapper.Map<Item>(command.Item);
-                item.Name = $"{item.Type}-{item.Size}";
                 await _unitOfWork.ItemRepository.AddItem(item);
                 await _unitOfWork.SaveAsync();
                 return true;

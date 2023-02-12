@@ -21,7 +21,6 @@ namespace POS.Api.CHQV.Handlers
         public async Task<OrderResponse?> Handle(PlaceOrder request, CancellationToken cancellationToken)
         {
             var order = _mapper.Map<Order>(request.Order);
-            order.Value = GetOrderValue(order.Pizzas);
             await _unitOfWork.OrderRepository.AddOrder(order);
             await _unitOfWork.SaveAsync();
 
