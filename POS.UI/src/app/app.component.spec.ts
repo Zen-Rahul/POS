@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialModule } from 'src/material.module';
 import { AppComponent } from './app.component';
-import { PizzaComponent } from './pizza/pizza.component';
+import { PizzaComponent } from './components/pizza/pizza.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {

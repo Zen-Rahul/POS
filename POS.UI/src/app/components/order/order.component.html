@@ -1,0 +1,31 @@
+
+<div class="order-container">
+<div *ngIf="!id" [formGroup]="orderIdForm">
+    <mat-form-field appearance="fill">
+        <mat-label>Order Id</mat-label>
+        <input formControlName = "id" matInput>
+      </mat-form-field>
+
+      <button mat-button [disabled]="!orderIdForm.valid" (click)="getOrder()">Get Order</button>
+</div>
+<div>
+    <h2>Order Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <td colspan="4">Order Id : {{order?.id}}</td>
+            </tr>
+        </thead>
+        <tr>
+            <td>Total Price</td>
+            <td>{{order?.value}}</td>
+        </tr>
+        <tr>
+            <td>Deliver Address</td>
+            <td>{{order?.user?.deliveryAddress}}</td>
+        </tr>
+    </table>
+
+    <p>Thanks {{order?.user?.name}} for ordering pizza!!</p>
+</div>
+</div>

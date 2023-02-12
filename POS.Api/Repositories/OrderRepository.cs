@@ -28,7 +28,15 @@ namespace POS.Api.Repositories
 
         public async Task<Order?> GetOrderById(int id)
         {
-            return await Context.Orders.FindAsync(id);
+            return await Context.Orders
+                .Include(x => x.Pizzas)
+                .ThenInclude(y => y.Toppings)
+                .Include(x => x.Pizzas)
+                .ThenInclude(y => y.Sauces)
+                .Include(x => x.Pizzas)
+                .ThenInclude(y => y.Cheese)
+                .Include(x => x.User)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<Order>> GetOrders()

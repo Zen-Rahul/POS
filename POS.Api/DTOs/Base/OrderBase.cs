@@ -6,5 +6,7 @@ namespace POS.Api.DTOs.Base
     {
         public List<PizzaRequest> Pizzas { get; set; }
         public UserRequest User { get; set; }
+
+        public decimal Value { get; set; }
     }
 }

@@ -6,5 +6,6 @@ namespace POS.Api.DTOs.Request
     public class ItemRequest: ItemBase
     {
         public InventoryType Type { get; set; }
+        public string Name { get; set; }
     }
 }
