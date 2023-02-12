@@ -1,17 +1,21 @@
 import { TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialModule } from 'src/material.module';
 import { AppComponent } from './app.component';
+import { PizzaComponent } from './pizza/pizza.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
+        BrowserAnimationsModule,
         MaterialModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        PizzaComponent
       ],
     }).compileComponents();
   });
@@ -22,16 +26,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'POS.UI'`, () => {
+  it(`should have as title 'Pizzeria'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('POS.UI');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('POS.UI app is running!');
+    expect(app.title).toEqual('Pizzeria');
   });
 });
