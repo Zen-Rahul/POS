@@ -51,10 +51,11 @@ jobs:
         with:
           node-version: 18
 
+      - name: Goto UI directory
+        run: cd POS.UI
+      
       - name: Install dependencies
-        run: 
-          cd POS.UI
-          npm install
+        run: npm install
 
       - name: Run tests
         run: npm run test:headless
