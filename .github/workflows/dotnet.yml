@@ -1,3 +1,4 @@
+
 name: POS CI
 
 on:
@@ -38,7 +39,7 @@ jobs:
     - name: Build
       run: |
         dotnet tool install --global dotnet-sonarscanner
-        dotnet sonarscanner begin /k:"Zen-Rahul_POS" /o:"zen-rahul" /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+        dotnet sonarscanner begin /k:"Zen-Rahul_POS" /o:"zen-rahul" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
         dotnet build --no-restore
         dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
         
