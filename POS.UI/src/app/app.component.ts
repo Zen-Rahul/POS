@@ -16,10 +16,12 @@ export class AppComponent {
     {
       displayName: 'New Order',
       href: '',
+      iconName: 'local_pizza'
     },
     {
       displayName: 'Find Order',
       href: '/order',
+      iconName: 'search'
     },
   ];
 

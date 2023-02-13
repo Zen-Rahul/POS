@@ -1,31 +1,61 @@
-
-<div class="order-container">
-<div *ngIf="!id" [formGroup]="orderIdForm">
-    <mat-form-field appearance="fill">
-        <mat-label>Order Id</mat-label>
-        <input formControlName = "id" matInput>
-      </mat-form-field>
-
-      <button mat-button [disabled]="!orderIdForm.valid" (click)="getOrder()">Get Order</button>
-</div>
 <div>
-    <h2>Order Details</h2>
-    <table>
-        <thead>
-            <tr>
-                <td colspan="4">Order Id : {{order?.id}}</td>
-            </tr>
-        </thead>
-        <tr>
-            <td>Total Price</td>
-            <td>{{order?.value}}</td>
-        </tr>
-        <tr>
-            <td>Deliver Address</td>
-            <td>{{order?.user?.deliveryAddress}}</td>
-        </tr>
-    </table>
+    <mat-card *ngIf="!id" class="order-container">
+        <form [formGroup]="orderIdForm">
+            <mat-card-title> <mat-icon>search</mat-icon>
+                Search Order</mat-card-title>
+            <mat-card>
+                <mat-grid-list cols="6" rowHeight="95px">
+                    <mat-grid-tile>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Order Id</mat-label>
+                            <input formControlName="id" matInput>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <button mat-button [disabled]="!orderIdForm.valid" (click)="getOrder()">Get Order</button>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-card>
+        </form>
+    </mat-card>
 
-    <p>Thanks {{order?.user?.name}} for ordering pizza!!</p>
-</div>
+    <mat-card *ngIf="order" class="order-container">
+        <mat-card-title> <mat-icon>local_pizza</mat-icon>
+            Order detials</mat-card-title>
+        <mat-card>
+            <mat-grid-list cols="6" rowHeight="95px">
+                <mat-grid-tile>
+                    Order Id : {{order?.id}}
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-icon>
+                        shopping_cart
+                    </mat-icon>
+                    Total
+                    ₹{{order?.value}}
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    Contact number: {{order?.user?.mobileNumber}}
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    Delivery addreddress: {{order?.user?.deliveryAddress}}
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    Email: {{order?.user?.email}}
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+
+                </mat-grid-tile>
+
+            </mat-grid-list>
+            <mat-grid-list cols="6" rowHeight="95px">
+                <mat-grid-tile>
+                    Thanks {{order?.user?.name}} for ordering pizza!!<mat-icon>sentiment_very_satisfied</mat-icon>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-card>
+    </mat-card>
 </div>

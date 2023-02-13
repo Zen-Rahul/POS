@@ -1,6 +1,12 @@
-<h2 mat-dialog-title>Add your toppings, sauces, and cheese options</h2>
+<h2 mat-dialog-title>
+    <mat-icon> local_pizza</mat-icon>
+    Add your toppings, sauces, and cheese options
+</h2>
 <mat-dialog-content class="mat-typography">
-    <h3>Cart total: {{cartTotal}}</h3>
+    <h3>
+        <mat-icon>shopping_cart</mat-icon>
+        Cart total: ₹{{cartTotal}}
+    </h3>
     <ng-container *ngIf="takingOrder; else userFormTemplate">
         <app-pizza-card [pizza]="pizza"></app-pizza-card>
         <div [formGroup]="pizzaForm">
@@ -42,35 +48,47 @@
         <button mat-button (click)="takingOrder = !takingOrder">Add delivery Details</button>
     </ng-container>
     <ng-template #userFormTemplate>
-        <form #userFormRef [formGroup]="userForm">
-            <mat-form-field appearance="fill">
-                <mat-label>Name</mat-label>
-                <input formControlName ="name" matInput>
-              </mat-form-field>
+        <mat-card>
+            <form [formGroup]="userForm">
+                <mat-card-title>Delivery details</mat-card-title>
+                <mat-card>
+                    <mat-grid-list cols="2" rowHeight="95px">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Name</mat-label>
+                                <input formControlName="name" matInput>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Email</mat-label>
+                                <input formControlName="email" matInput>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </mat-grid-list>
 
-              <mat-form-field appearance="fill">
-                <mat-label>Email</mat-label>
-                <input formControlName ="email" matInput>
-              </mat-form-field>
+                    <mat-grid-list cols="2" rowHeight="95px">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Mobile number</mat-label>
+                                <input formControlName="mobileNumber" matInput>
+                            </mat-form-field>
+                        </mat-grid-tile>
 
-              <mat-form-field appearance="fill">
-                <mat-label>Mobile number</mat-label>
-                <input formControlName ="mobileNumber" matInput>
-              </mat-form-field>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Delivery Address</mat-label>
+                                <input formControlName="deliveryAddress" matInput>
+                            </mat-form-field>
+                        </mat-grid-tile>
 
-              <mat-form-field appearance="fill">
-                <mat-label>Delivery Address</mat-label>
-                <input formControlName ="deliveryAddress" matInput>
-              </mat-form-field>
-        </form>
-        
+                    </mat-grid-list>
+                </mat-card>
+            </form>
+        </mat-card>
         <button mat-button (click)="takingOrder = !takingOrder">Go back</button>
-        <button mat-button [disabled]="!userForm.valid" (click)="placeOrder()">Place Order</button>
+            <button mat-button [disabled]="!userForm.valid" (click)="placeOrder()">Place Order</button>
     </ng-template>
-
-    
-
-    
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
