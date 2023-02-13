@@ -23,37 +23,42 @@
         <mat-card-title> <mat-icon>local_pizza</mat-icon>
             Order detials</mat-card-title>
         <mat-card>
-            <mat-grid-list cols="6" rowHeight="95px">
+            <mat-grid-list cols="5" rowHeight="95px">
                 <mat-grid-tile>
                     Order Id : {{order.id}}
                 </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <mat-icon> email</mat-icon>
+                    Email: {{order.user.email}}
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <mat-icon>home</mat-icon>
+                    Delivery addreddress: {{order.user.deliveryAddress}}
+                </mat-grid-tile>
+               
+            </mat-grid-list>
+            <mat-grid-list cols="5" rowHeight="95px">
                 <mat-grid-tile>
                     <mat-icon>
                         shopping_cart
                     </mat-icon>
                     Total
                     ₹{{order.value}}
-                </mat-grid-tile>
+                </mat-grid-tile> 
 
                 <mat-grid-tile>
+                    <mat-icon>phone_iphone</mat-icon>
                     Contact number: {{order.user.mobileNumber}}
                 </mat-grid-tile>
 
-                <mat-grid-tile>
-                    Delivery addreddress: {{order.user.deliveryAddress}}
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    Email: {{order.user.email}}
-                </mat-grid-tile>
-
-                <mat-grid-tile>
-
-                </mat-grid-tile>
-
             </mat-grid-list>
-            <mat-grid-list cols="6" rowHeight="95px">
+            <mat-grid-list cols="5" rowHeight="95px">
                 <mat-grid-tile>
-                    Thanks {{order.user.name}} for ordering pizza!!<mat-icon>sentiment_very_satisfied</mat-icon>
+                    Thanks &nbsp; <span style="font-weight: bold;"> {{order.user.name}}</span> &nbsp; for ordering pizza!!
+                    <mat-icon>sentiment_very_satisfied</mat-icon>
+                    <mat-icon>sentiment_very_satisfied</mat-icon>
                 </mat-grid-tile>
             </mat-grid-list>
         </mat-card>
