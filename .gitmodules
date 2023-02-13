@@ -1,0 +1,3 @@
+[submodule "POS.UI"]
+	path = POS.UI
+	url = https://github.com/Zen-Rahul/POS.UI
