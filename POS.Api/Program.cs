@@ -21,9 +21,7 @@ try
     builder.ConfigureSwagger();
     builder.ConfigureMediatR();
     builder.ConfigureFluentValidation();
-    builder.AddSingletonDependencies();
     builder.AddScopedDependencies();
-    builder.AddTransitiveDependencies();
 
     var app = builder.Build();
 

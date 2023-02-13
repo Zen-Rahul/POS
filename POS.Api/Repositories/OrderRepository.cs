@@ -65,11 +65,5 @@ namespace POS.Api.Repositories
             }
             _disposed = true;
         }
-
-        public new void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
     }
 }

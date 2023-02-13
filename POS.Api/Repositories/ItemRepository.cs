@@ -18,11 +18,11 @@ namespace POS.Api.Repositories
             return Task.Run(() => Context.Items.Add(Item));
         }
 
-        public Task DeleteItem(int ItemId)
+        public Task DeleteItem(int id)
         {
             return Task.Run(() =>
             {
-                var Item = Context.Items.FindAsync(ItemId);
+                var Item = Context.Items.FindAsync(id);
                 Context.Remove(Item);
             });
         }
@@ -42,11 +42,11 @@ namespace POS.Api.Repositories
             return await Context.Items.Where(x => x.Type.Equals(inventoryType)).ToListAsync();
         }
 
-        public Task UpdateItem(Item Item)
+        public Task UpdateItem(Item item)
         {
             return Task.Run(() =>
             {
-                Context.Entry(Item).State = EntityState.Modified;
+                Context.Entry(item).State = EntityState.Modified;
             });
         }
 

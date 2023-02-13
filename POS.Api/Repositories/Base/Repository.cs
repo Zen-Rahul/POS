@@ -58,11 +58,6 @@ namespace POS.Api.Repositories.Base
             return await Task.Run(() => _dbSet);
         }
 
-        public virtual Task<IEnumerable<T>> GetItems(InventoryType inventoryType)
-        {
-            throw new NotImplementedException();
-        }
-
         #region IDisposable Implementation
         private bool _disposed = false;
 

@@ -7,7 +7,7 @@ namespace POS.Api.Repositories.Interfaces
     {
         Task AddItem(Item item);
         Task UpdateItem(Item item);
-        Task DeleteItem(int itemId);
+        Task DeleteItem(int id);
         Task<IEnumerable<Item>> GetItems();
         Task<IEnumerable<Item>> GetItems(InventoryType inventoryType);
         Task<Item?> GetItemById(int id);

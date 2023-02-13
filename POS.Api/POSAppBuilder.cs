@@ -70,10 +70,6 @@ namespace POS.Api
             builder.Services.AddScoped<IValidator<CreateInventory>, CreateInventoryValidator>();
         }
 
-        public static void AddSingletonDependencies(this WebApplicationBuilder builder)
-        {
-        }
-
         public static void AddScopedDependencies(this WebApplicationBuilder builder)
         {
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -82,10 +78,6 @@ namespace POS.Api
             builder.Services.AddScoped<IPizzaRepository, PizzaRepository>();
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
-        }
-
-        public static void AddTransitiveDependencies(this WebApplicationBuilder builder)
-        {
         }
 
     }
