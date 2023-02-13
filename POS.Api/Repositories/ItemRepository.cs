@@ -13,9 +13,9 @@ namespace POS.Api.Repositories
         {
         }
 
-        public Task AddItem(Item Item)
+        public Task AddItem(Item item)
         {
-            return Task.Run(() => Context.Items.Add(Item));
+            return Task.Run(() => Context.Items.Add(item));
         }
 
         public Task DeleteItem(int id)
@@ -62,12 +62,6 @@ namespace POS.Api.Repositories
                 }
             }
             _disposed = true;
-        }
-
-        public new void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }

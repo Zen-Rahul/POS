@@ -9,7 +9,6 @@ logger.Debug("Logger Intialized");
 try
 {
     var builder = WebApplication.CreateBuilder(args);
-    const string MyAllowSpecificOrigins = "allowedOrigins";
     builder.Services.AddControllers().AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
